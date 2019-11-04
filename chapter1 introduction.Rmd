@@ -1,0 +1,8 @@
+
+# About the project
+
+*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you can use R Markdown syntax.*
+
+I went to the R-courses last fall and even though it was really difficult to me and lot of hard work needed, I really got excited and now Im here again feeling very uncertain but at the same time very motivated to learn. 
+Here is the link to my IODS project in GitHub
+https://github.com/madmintt/IODS-project
