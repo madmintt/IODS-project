@@ -30,5 +30,5 @@ lrn14$attitude <- lrn14$Attitude / 10
 learning2014 <- filter(learning2014, Points > 0) 
 str(learning2014)
 
-?write.csv
-  
+write.csv(learning2014, "create_learning2014.csv")
+read.csv("create_learning2014.csv", TRUE, ",")
