@@ -1,7 +1,87 @@
-# Insert chapter 2 title here
+# {Regression and model validation}
+## {Minttu Lindholm 11.11.2019}
 
-*Describe the work you have done this week and summarize your learning.*
+```{r, echo=FALSE}
+library("dplyr")
+library("ggplot2")
+library("GGally")
+```
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
+```{r}
+learning2014 <-read.csv("create_learning2014.csv", TRUE, ",")
+summary(learning2014)
+```
+This data includes 166 observations and seven variables, witch are gender, age, attitude (towards statistics) and three different studyingstrategies -or skills; deep, surface and strategic. The data includes also the exam points -variable, whitch we consider here the indicator of learning statistics.  
+
+**VISUALIZING THE DATA**
+
+**Plot matrix of the variables**
+
+```{r}
+visual_d <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+visual_d
+```
+```{r}
+pa <- ggplot(learning2014, aes(x = Attitude, y = Points, col = gender))
+pat <- pa + geom_point()
+patt <-pat + geom_smooth(method = "lm")
+patti <-patt + ggtitle("Attitude vs. points")
+patti
+```
+
+There seems to be a positive connection between attitude and points.
+
+```{r}
+pd <- ggplot(learning2014, aes(x = deep, y = Points, col = gender))
+pde <- pd + geom_point()
+pdee <- pde + geom_smooth(method = "lm")
+pdeep <- pdee + ggtitle("Deep vs. points")
+pdeep
+```
+There seems to be absolutely no connection between deep and points.
+
+```{r}
+pst <- ggplot(learning2014, aes(x = stra, y = Points, col = gender))
+pstr <- pst + geom_point()
+pstra <- pstr + geom_smooth(method = "lm")
+pstrat <- pstra + ggtitle("Strategic vs. points")
+pstrat
+```
+There might be a small positive connection between strategic and points.
+
+```{r}
+psu <- ggplot(learning2014, aes(x = surf, y = Points, col = gender))
+psur <- psu + geom_point()
+psurf <- psur + geom_smooth(method = "lm")
+psurfa <- psurf + ggtitle("Surface vs. points")
+psurfa
+```
+There could be a small negative connection between surface and points.
+
+```{r}
+ika <- ggplot(learning2014, aes(x = Age, y = Points, col = gender))
+ikak <- ika + geom_point()
+ikak <- ika + geom_smooth(method = "lm")
+ikaka <- ikak + ggtitle("Age vs. points")
+ikaka
+```
+According to this it seems like age has something to do with the points in the malegroup.  
+
+```{r}
+my_regressionmodel <- lm(formula = Points ~ Attitude, data = learning2014)
+summary(my_regressionmodel)
+```
+I did the regression analysis first with having attitude, strategic and surface-learning as explanatory variables, because they seemed to be the three most potential explanatories when looking at the plots. However, the regression analysis showed, that no other variables but attitude are explaining the exampoints with statistical significance, so I only left that in the final model. So the interpretation is that when attitude increases one unit, the exampoints increases 3.5 in average. The multiple R-square is 0.1906 whitch means that the model explains 19 % of the variance of the exampoints in this case.
+
+**Diagnostic plots**
+
+Every statistical model includes several assumptions. The linear regresssion model assumes first of all that the errors of the model are normally distributed. Another assumption of linear  regression model is that the errors have a constant variance and that they are not dependent of the explanatory variables. By making diagnostic plots we can see if theese assumptions come true in our model. 
+
+```{r}
+par(mfrow = c(2,2))
+plot(my_regressionmodel, which = c(1, 2, 5))
+```
+
+By looking at the diagnostic plot of Residuals vs. Fitted values, we can see, that the plots form no pattern, whitch means that the errors do not depend on the explanatory variable,so no problem in there.
+The QQplot shows a nice fit with the line interpreting that the errors are normally distributed. 
+The value of leverage is very low 0.04, which means that there are no observations with unusual leverage.
