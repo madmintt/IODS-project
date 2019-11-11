@@ -1,5 +1,7 @@
-# {Regression and model validation}
-## {Minttu Lindholm 11.11.2019}
+# REGRESSION AND MODEL VALIDATION
+## Minttu Lindholm 11.11.2019
+
+*This week I have learned to draw advanced scatterplots and some new things about the diagnostics of regressionmodel.*
 
 ```{r, echo=FALSE}
 library("dplyr")
@@ -85,3 +87,5 @@ plot(my_regressionmodel, which = c(1, 2, 5))
 By looking at the diagnostic plot of Residuals vs. Fitted values, we can see, that the plots form no pattern, whitch means that the errors do not depend on the explanatory variable,so no problem in there.
 The QQplot shows a nice fit with the line interpreting that the errors are normally distributed. 
 The value of leverage is very low 0.04, which means that there are no observations with unusual leverage.
+
+#The end

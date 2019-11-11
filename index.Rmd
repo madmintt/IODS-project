@@ -1,7 +1,7 @@
 ---
 title: "IODS course project"
 author: "Minttu Lindholm"
-output:
+output: index.knit.md
   html_document:
     theme: cosmo
     toc: true
