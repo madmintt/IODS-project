@@ -642,7 +642,7 @@ g + geom_point()</code></pre>
 <p>The propability that the model predicts right FALSE is 0.65 and wronng FALSE 0.05. The propability that the model predicts right TRUE is 0.07 and wrong TRUE 0.23. The training error is 0.27.</p>
 <pre class="r"><code>cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = Mymodel, K = 10)
 cv$delta</code></pre>
-<pre><code>## [1] 0.2696335 0.2722719</code></pre>
+<pre><code>## [1] 0.2748691 0.2803925</code></pre>
 <p>The training error is just a little bit bigger than in the model introduced in Datacamp.</p>
 <p><strong>Super-bonus</strong></p>
 <pre class="r"><code>vari27 &lt;- 0.194
